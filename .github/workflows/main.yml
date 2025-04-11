@@ -42,9 +42,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Force upgrade webdriver-manager to support `arch="win64"`
-        run: pip install --upgrade webdriver-manager
-
       - name: Run unlock script
         env:
           EMAIL: ${{ secrets.EMAIL }}
