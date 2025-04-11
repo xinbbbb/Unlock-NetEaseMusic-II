@@ -8,7 +8,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.core.utils import ChromeType
 from retrying import retry
 
 # Configure logging
@@ -39,8 +38,8 @@ def extension_login():
 
     logging.info("Initializing Chrome WebDriver")
     try:
-        # ✅ 使用 win64 架构 chromedriver
-        service = Service(ChromeDriverManager(ChromeType.GOOGLE, os_type="win64").install())
+        # ✅ 使用 win64 架构的 chromedriver
+        service = Service(ChromeDriverManager(os_type="win64").install())
         browser = webdriver.Chrome(service=service, options=chrome_options)
     except Exception as e:
         logging.error(f"Failed to initialize ChromeDriver: {e}")
