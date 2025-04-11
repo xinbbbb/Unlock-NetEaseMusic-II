@@ -20,8 +20,8 @@ def enter_iframe(browser):
     time.sleep(5)  # 给 iframe 额外时间加载
     try:
         iframe = WebDriverWait(browser, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//*[starts-with(@id,'x-URS-iframe')]")
-        ))
+            EC.presence_of_element_located((By.XPATH, "//*[starts-with(@id,'x-URS-iframe')]"))
+        )
         browser.switch_to.frame(iframe)
         logging.info("Switched to login iframe")
     except Exception as e:
@@ -39,7 +39,8 @@ def extension_login():
 
     logging.info("Initializing Chrome WebDriver")
     try:
-        service = Service(ChromeDriverManager().install())  # Auto-download correct chromedriver
+        # ✅ 强制使用 win64 架构的 chromedriver
+        service = Service(ChromeDriverManager(platform="win64").install())
         browser = webdriver.Chrome(service=service, options=chrome_options)
     except Exception as e:
         logging.error(f"Failed to initialize ChromeDriver: {e}")
